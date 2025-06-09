@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Distribuidor Autorizado</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsky6i2bF2OhgKZsU5TjnC-TD5n9ZFN5OBbbvpT1PrFaeZ4BElmabdtur_B0BMl15IqXE&usqp=CAU');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .container {
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 30px;
+            border-radius: 15px;
+            width: 80%;
+            max-width: 500px;
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .logo {
+            width: 200px;
+            margin: 0 auto 20px;
+            display: block;
+        }
+
+        .frase-motivacional {
+            font-style: italic;
+            margin: 15px 0;
+            color: #ffff00;
+            font-size: 16px;
+        }
+
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-streaming {
+            background-color: #ff0000;
+            color: white;
+        }
+
+        .btn-recharges {
+            background-color: #000000;
+            color: #ffff00;
+        }
+
+        .btn-canva {
+            background-color: #00C4CC;
+            color: white;
+        }
+
+        .btn-capcut {
+            background-color: #EE1D52;
+            color: white;
+        }
+
+        .btn-chatgpt {
+            background-color: #10A37F;
+            color: white;
+        }
+
+        /* Estilos para la ventana emergente */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.9);
+            z-index: 1000;
+        }
+
+        .popup-content {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .popup-iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>DISTRIBUIDOR AUTORIZADO</h1>
+        <img src="https://www.vendeygana.net/assets/img/logo-1.png" alt="Logo Vende y Gana" class="logo">
+        
+        <p class="frase-motivacional" id="fraseMotivacional"></p>
+        
+        <button class="btn btn-streaming" onclick="abrirStreaming()">CUENTAS STREAMING</button>
+        
+        <a href="#" class="btn btn-recharges" onclick="mostrarRecargas()">RECARGAS DE JUEGOS</a>
+
+        <!-- Botones sin logos -->
+        <a href="#" class="btn btn-canva" onclick="mostrarCanva()">CANVA PRO</a>
+        
+        <a href="#" class="btn btn-capcut" onclick="mostrarCapCut()">CAPCUT PRO</a>
+        
+        <a href="#" class="btn btn-chatgpt" onclick="mostrarChatGPT()">CHATGPT PLUS</a>
+    </div>
+
+    <!-- Ventana emergente para streaming -->
+    <div id="streamingPopup" class="popup">
+        <div class="popup-content">
+            <span class="close-btn" onclick="cerrarStreaming()">&times;</span>
+            <iframe src="https://vendeygana2.github.io/DISTRIBUIDORESESTR/" class="popup-iframe"></iframe>
+        </div>
+    </div>
+
+    <script>
+        // Frases motivacionales
+        const frases = [
+            "El éxito es la suma de pequeños esfuerzos repetidos día tras día. — Robert Collier",
+            "No importa lo lento que vayas, siempre y cuando no te detengas. — Confucio",
+            "El único límite para nuestros logros es lo que creemos posible. — Michelle Obama",
+            "Si puedes soñarlo, puedes hacerlo. — Walt Disney",
+            "La perseverancia es el secreto de todos los triunfos. — Victor Hugo",
+            "Cada día es una nueva oportunidad para cambiar tu vida. — Anónimo",
+            "El fracaso es simplemente la oportunidad de comenzar de nuevo, esta vez de forma más inteligente. — Henry Ford",
+            "No esperes oportunidades, créalas. — George Bernard Shaw",
+            "Lo que no te desafía, no te cambia. — Fred DeVito",
+            "Tu actitud, no tu aptitud, determinará tu altitud. — Zig Ziglar"
+        ];
+
+        // Mostrar frase aleatoria sin repetir
+        let frasesMostradas = [];
+        
+        function mostrarFraseAleatoria() {
+            if (frasesMostradas.length === frases.length) {
+                frasesMostradas = [];
+            }
+            
+            let frasesDisponibles = frases.filter(frase => !frasesMostradas.includes(frase));
+            let fraseAleatoria = frasesDisponibles[Math.floor(Math.random() * frasesDisponibles.length)];
+            
+            frasesMostradas.push(fraseAleatoria);
+            document.getElementById('fraseMotivacional').textContent = fraseAleatoria;
+        }
+
+        // Mostrar al cargar la página
+        window.onload = mostrarFraseAleatoria;
+
+        // Función para abrir streaming en popup
+        function abrirStreaming() {
+            document.getElementById('streamingPopup').style.display = 'block';
+            document.body.style.overflow = 'hidden'; // Evitar scroll en el fondo
+        }
+
+        // Función para cerrar streaming
+        function cerrarStreaming() {
+            document.getElementById('streamingPopup').style.display = 'none';
+            document.body.style.overflow = 'auto'; // Restaurar scroll
+        }
+
+        // Funciones de los otros botones
+        function mostrarRecargas() {
+            alert("Sección de RECARGAS DE JUEGOS seleccionada");
+        }
+
+        function mostrarCanva() {
+            alert("Sección de CANVA PRO seleccionada");
+        }
+
+        function mostrarCapCut() {
+            alert("Sección de CAPCUT PRO seleccionada");
+        }
+
+        function mostrarChatGPT() {
+            alert("Sección de CHATGPT PLUS seleccionada");
+        }
+    </script>
+</body>
+</html>
