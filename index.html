@@ -98,7 +98,7 @@
             color: white;
         }
 
-        /* Estilos para la ventana emergente */
+        /* Estilos para las ventanas emergentes */
         .popup {
             display: none;
             position: fixed;
@@ -143,7 +143,7 @@
         
         <button class="btn btn-streaming" onclick="abrirStreaming()">CUENTAS STREAMING</button>
         
-        <button class="btn btn-recharges" onclick="mostrarRecargas()">RECARGAS DE JUEGOS</button>
+        <button class="btn btn-recharges" onclick="abrirRecargas()">RECARGAS DE JUEGOS</button>
 
         <button class="btn btn-canva" onclick="mostrarCanva()">CANVA PRO</button>
         
@@ -157,6 +157,14 @@
         <div class="popup-content">
             <span class="close-btn" onclick="cerrarStreaming()">&times;</span>
             <iframe src="https://vendeygana2.github.io/DISTRIBUIDORESESTR/" class="popup-iframe"></iframe>
+        </div>
+    </div>
+
+    <!-- Ventana emergente para recargas de juegos -->
+    <div id="recargasPopup" class="popup">
+        <div class="popup-content">
+            <span class="close-btn" onclick="cerrarRecargas()">&times;</span>
+            <iframe src="https://vendeygana2.github.io/RECARGAJUEGODIS/" class="popup-iframe"></iframe>
         </div>
     </div>
 
@@ -205,11 +213,18 @@
             document.body.style.overflow = 'auto'; // Restaurar scroll
         }
 
-        // Funciones de los otros botones
-        function mostrarRecargas() {
-            window.location.href = "https://vendeygana2.github.io/RECARGAJUEGODIS/";
+        // Funciones para recargas de juegos
+        function abrirRecargas() {
+            document.getElementById('recargasPopup').style.display = 'block';
+            document.body.style.overflow = 'hidden'; // Evitar scroll en el fondo
         }
 
+        function cerrarRecargas() {
+            document.getElementById('recargasPopup').style.display = 'none';
+            document.body.style.overflow = 'auto'; // Restaurar scroll
+        }
+
+        // Funciones de los otros botones
         function mostrarCanva() {
             alert("Sección de CANVA PRO seleccionada");
         }
