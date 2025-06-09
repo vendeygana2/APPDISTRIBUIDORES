@@ -168,6 +168,30 @@
         </div>
     </div>
 
+    <!-- Ventana emergente para Canva Pro -->
+    <div id="canvaPopup" class="popup">
+        <div class="popup-content">
+            <span class="close-btn" onclick="cerrarCanva()">&times;</span>
+            <iframe src="https://vendeygana.forms.app/canvapro-2" class="popup-iframe"></iframe>
+        </div>
+    </div>
+
+    <!-- Ventana emergente para CapCut Pro -->
+    <div id="capcutPopup" class="popup">
+        <div class="popup-content">
+            <span class="close-btn" onclick="cerrarCapCut()">&times;</span>
+            <iframe src="https://vendeygana.forms.app/cuentacatcup-1" class="popup-iframe"></iframe>
+        </div>
+    </div>
+
+    <!-- Ventana emergente para ChatGPT Plus -->
+    <div id="chatgptPopup" class="popup">
+        <div class="popup-content">
+            <span class="close-btn" onclick="cerrarChatGPT()">&times;</span>
+            <iframe src="https://vendeygana.forms.app/chatgpt-1" class="popup-iframe"></iframe>
+        </div>
+    </div>
+
     <script>
         // Frases motivacionales
         const frases = [
@@ -224,17 +248,37 @@
             document.body.style.overflow = 'auto'; // Restaurar scroll
         }
 
-        // Funciones de los otros botones
+        // Funciones para Canva Pro
         function mostrarCanva() {
-            alert("Sección de CANVA PRO seleccionada");
+            document.getElementById('canvaPopup').style.display = 'block';
+            document.body.style.overflow = 'hidden'; // Evitar scroll en el fondo
         }
 
+        function cerrarCanva() {
+            document.getElementById('canvaPopup').style.display = 'none';
+            document.body.style.overflow = 'auto'; // Restaurar scroll
+        }
+
+        // Funciones para CapCut Pro
         function mostrarCapCut() {
-            alert("Sección de CAPCUT PRO seleccionada");
+            document.getElementById('capcutPopup').style.display = 'block';
+            document.body.style.overflow = 'hidden'; // Evitar scroll en el fondo
         }
 
+        function cerrarCapCut() {
+            document.getElementById('capcutPopup').style.display = 'none';
+            document.body.style.overflow = 'auto'; // Restaurar scroll
+        }
+
+        // Funciones para ChatGPT Plus
         function mostrarChatGPT() {
-            alert("Sección de CHATGPT PLUS seleccionada");
+            document.getElementById('chatgptPopup').style.display = 'block';
+            document.body.style.overflow = 'hidden'; // Evitar scroll en el fondo
+        }
+
+        function cerrarChatGPT() {
+            document.getElementById('chatgptPopup').style.display = 'none';
+            document.body.style.overflow = 'auto'; // Restaurar scroll
         }
     </script>
 </body>
